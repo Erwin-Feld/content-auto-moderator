@@ -1,0 +1,17 @@
+{
+  "name": "content-auto-moderator",
+  "version": "1.0.0",
+  "description": "query RSS Feed and categorize the post content to negative, neutral or positiv",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "prebuild": "npx rimraf build",
+    "build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build"
+  },
+  "author": "Erwin Feld",
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.11.0",
+    "sentiment": "^5.0.2"
+  }
+}
