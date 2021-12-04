@@ -4,6 +4,11 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { async } from "regenerator-runtime";
 
+import sentimentAnalysis from 'sentiment'
+
+// const sentimentAnalysis = require('sentiment');
+
+
 const urlNewsApi = "https://saurav.tech/NewsAPI/everything/fox-news.json";
 
 async function fetchNewsArticles(url) {
@@ -28,6 +33,8 @@ async function fetchNewsArticles(url) {
   }
 }
 
+
+sentimentArticel()
 
 async function init() {
   const apiData = await fetchNewsArticles(urlNewsApi);
@@ -56,7 +63,7 @@ async function init() {
 
 // 
 
-init();
+// init();
 
 /* loop over articles and display them after 5 sec delay */
 
@@ -71,7 +78,13 @@ function extractArticles(apiData) {
   return articles;
 }
 
-function sentimentArticel() {}
+function sentimentArticel() {
+ 
+
+const sentiment = new sentimentAnalysis();
+const result = sentiment.analyze("killed two fucking chicken this night");
+console.log(result);    // Score: -2, Comparative: -0.666
+}
 
 function renderArticel(articles) {
   const timer = (ms) => new Promise((res) => setTimeout(res, ms));
