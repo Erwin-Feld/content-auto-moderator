@@ -59,6 +59,7 @@ function extractArticles(apiData) {
 }
 
 function analyseSentiment(article) {
+  //Add refine function
   const sentiment = new sentimentAnalysis();
   const sentimentResult = sentiment.analyze(article.description);
 
@@ -97,6 +98,8 @@ function addArticels(article){
 
 
 function renderArticelSentiment(article) {
+  // Add url 
+
   const parentContainer = document.querySelector(".container");
   parentContainer.innerHTML = "";
 
@@ -142,11 +145,11 @@ function timeDelayedLoop(articles) {
      
       renderArticelClean(article)
       
-      await timer(15); 
+      await timer(1500); 
       const sentimentArticel = analyseSentiment(article);
       renderArticelSentiment(sentimentArticel)
    
-      await timer(70);
+      await timer(3000);
 
       if(sentimentArticel.sentiment !== "negative"){
         addArticels(sentimentArticel)
