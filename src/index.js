@@ -17,7 +17,14 @@ header
 p tag with info 
 
 */
-init()
+// init()
+// workaorund parcel can not find onclick on html element
+function getButton(){
+  document.getElementById("start-sentiment").addEventListener("click",init)
+}
+
+getButton()
+
 
 async function fetchNewsArticles(url) {
   try {
@@ -60,6 +67,8 @@ function extractArticles(apiData) {
 
 function analyseSentiment(article) {
   //Add refine function
+
+  // Add if not enough words for assomtion --> not enough data for sentiment analysis
   const sentiment = new sentimentAnalysis();
   const sentimentResult = sentiment.analyze(article.description);
 
@@ -77,7 +86,8 @@ function analyseSentiment(article) {
 }
 
 function addArticels(article){
-  const parentContainer = document.querySelector(".row");
+  const parentContainer = document.getElementById("articel-container");
+
 
   const articelComponent = `
   <div class="col-md-6 col-lg-3">
@@ -100,8 +110,10 @@ function addArticels(article){
 function renderArticelSentiment(article) {
   // Add url 
 
-  const parentContainer = document.querySelector(".container");
+  const parentContainer = document.getElementById("sentiment-analysis");
   parentContainer.innerHTML = "";
+
+  // Add color span class="text-warning -- needs to change green red yellow
 
   const articelComponent = `
   <div class="card bg-light">
@@ -109,7 +121,8 @@ function renderArticelSentiment(article) {
           <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
           <h3 class="card-title mb-1">${article.title}</h3>
           <p class="card-text mb-1">${article.content}</p>
-          <p class="card-text mb-1">associated Sentiment ${article.sentiment}</p>
+        
+          <p class="card-text mb-1">potential sentiment <span class="text-warning"> ${article.sentiment} </span> </p>
       </div>
   </div>
   `;
@@ -118,7 +131,7 @@ function renderArticelSentiment(article) {
 
 
 function renderArticelClean(article) {
-  const parentContainer = document.querySelector(".container");
+  const parentContainer = document.getElementById("sentiment-analysis");
   const articelComponent = `
   <div class="card bg-light">
       <div class="card-body text-center">
