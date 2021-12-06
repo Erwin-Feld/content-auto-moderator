@@ -1,28 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="./favicon.ico">
-    <link rel="stylesheet" href="../scss/custom.scss">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="../scss/custom.scss" />
   </head>
   <body>
-    <div class="container ">
-        <h1>hola</h1>
-      </div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
+      <div class="container">
+        <!-- <a href="#" class="navbar-brand">Erwin Feld</a> -->
 
-      <section class="p-5 ">
-        <div class="container">
-          <h2 class="text-center mb-4">Articles</h2>
-    
-          <div class="row g-4">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a  target="_blank" rel="noopener noreferrer" href="" class="nav-link">about</a>
+            </li>
            
-          </div>
+            <li class="nav-item">
+              <a  target="_blank" rel="noopener noreferrer" href="" class="nav-link">Project link</a>
+            </li>
+          
+          </ul>
         </div>
-      </section>
+      </div>
+    </nav>
 
+    <section
+    class="bg-dark text-light p-2 p-lg-0 pt-lg-5 text-center text-sm-start"
+  >
+    <div class="container">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+          <h1>AI <span class="text-primary"> Content </span> Moderator</h1>
+          <p class="lead my-4">
+            performs a sentiment Analysis for the given text 
+            <br>
+            categorizes the content as negative, positive or neutral
+            <br>
+            discards content which can be perceived as negative 
+          </p>
+          <button
+              class="btn btn-primary btn-med"
+             id="start-sentiment"
+            >
+              Try it out!
+            </button>
+        </div>
+        <img
+          class="img-fluid w-25 d-none d-sm-block"
+          src="./img/undraw_hologram_fjwp.svg"
+          alt=""
+        />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row p-5">
+        <h3 class="pb-3" id="semantic">Sentiment Analysis</h3>
+        <div class="col-md-6">
+          <p class="mb-0">
+            is the use of natural language processing, text analysis, computational linguistics, and biometrics to systematically identify, extract, quantify, and study affective states and subjective information
+            <a  target="_blank" rel="noopener noreferrer" href="https://en.wikipedia.org/wiki/Sentiment_analysis">source</a> </p> 
+          <p class="mb-0">
+           
+            <br>
+            In this case AFINN-165 wordlist and Emoji Sentiment Ranking to perform sentiment analysis on arbitrary blocks of input text
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/thisandagain/sentiment" >how it works</a>
+          </p>
+        </div>
+        <div class="col-md-6" id="sentiment-analysis">
+          <div class="card align-items-center w-75">
+           
+            <div class="card-body bg-light text-dark">
+              <h5 class="card-title">goverment cracks down protest</h5>
+              <img
+              src="./img/protest.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+              
+              <p class="card-text">
+                The andolian police used teargas and force to crack down protests
+                .Several people where injured. The situations remains critical 
+              </p>
+              <p>sentiment <span class="text-danger fw-bold" > negative </span> </p>
+              <a href="#" class="btn btn-primary">go to Articel</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="p-5">
+      <div class="container">
+        
+        <h2 class="mb-4 invisible" id="filtered-articels">Articles</h2>
+
+        <div class="row g-4" id="articel-container"></div>
+      </div>
+    </section>
 
     <script src="./index.js"></script>
   </body>
 </html>
-

@@ -1,8 +1,8 @@
 /* able to use async/await in parcel reason babel polyfill */
 import "regenerator-runtime/runtime";
 import * as bootstrap from "bootstrap";
+
 import axios from "axios";
-import { async } from "regenerator-runtime";
 // https://stackoverflow.com/questions/65800993/avoiding-the-import-regenerator-runtime-runtime
 // Add delete runtime import
 
@@ -10,14 +10,14 @@ import sentimentAnalysis from "sentiment";
 
 const urlNewsApi = "https://saurav.tech/NewsAPI/everything/fox-news.json";
 
-/* start operation
-do this with button click am bestem
-header 
 
-p tag with info 
+// workaorund parcel can not find onclick on html element
+function getButton(){
+  document.getElementById("start-sentiment").addEventListener("click",init)
+}
 
-*/
-init()
+getButton()
+
 
 async function fetchNewsArticles(url) {
   try {
@@ -39,15 +39,10 @@ async function fetchNewsArticles(url) {
 }
 
 
-
 async function init() {
   const apiData = await fetchNewsArticles(urlNewsApi);
 
   const articles = extractArticles(apiData);
-
-  // console.log(articles[0].description)
-  // console.log(articles[0].content)
-  // console.log(articles[0])
   
   timeDelayedLoop(articles)
 }
@@ -60,11 +55,12 @@ function extractArticles(apiData) {
 
 function analyseSentiment(article) {
   //Add refine function
+
+  // Add if not enough words for assomtion --> not enough data for sentiment analysis
   const sentiment = new sentimentAnalysis();
   const sentimentResult = sentiment.analyze(article.description);
 
   const {score} = sentimentResult
-  console.log(sentimentResult)
   
   if(score >= 2) {
     return {...article,...{sentiment: "positiv"}}
@@ -76,18 +72,19 @@ function analyseSentiment(article) {
 
 }
 
-function addArticels(article){
-  const parentContainer = document.querySelector(".row");
+function addFilteredArticels(article){
+  const parentContainer = document.getElementById("articel-container");
+  const header = document.getElementById("filtered-articels");
+  header.classList.remove('invisible');
 
   const articelComponent = `
   <div class="col-md-6 col-lg-3">
-  <div class="card bg-light">
-    <div class="card-body text-center">
+    <div class="card ">
+      <div class="card-body flex-fill">
+      <h3 class="card-title">${article.title}</h3>
       <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
-      <h3 class="card-title mb-1">${article.title}</h3>
-      <p class="card-text mb-1">${article.content}</p>
-      <p class="card-text mb-1">as ${article.sentiment}</p>
-   
+      <p class="card-text">${article.content}</p>
+      <a target="_blank" rel="noopener noreferrer" href="${article.url}" class="btn btn-secondary">go to article</a>
     </div>
   </div>
 </div>
@@ -97,34 +94,45 @@ function addArticels(article){
 }
 
 
-function renderArticelSentiment(article) {
-  // Add url 
+function renderArticelWithSentiment(article) {
 
-  const parentContainer = document.querySelector(".container");
+  const parentContainer = document.getElementById("sentiment-analysis");
   parentContainer.innerHTML = "";
 
+  let sentimentOutcome = ""
+  if(article.sentiment === "negative") {
+    sentimentOutcome = "text-danger" /* red color of text */
+  } else if (article.sentiment === "neutral"){
+    sentimentOutcome = "text-secondary" /* gray color of text */
+  } else {
+    sentimentOutcome = "text-success" /* red color of text */
+  }
+
+  // Add color span class="text-warning -- needs to change green red yellow
+  // <p class="card-text mb-1">potential sentiment <span class="text-warning"> ${article.sentiment} </span> </p>
+
   const articelComponent = `
-  <div class="card bg-light">
-      <div class="card-body text-center">
-          <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
-          <h3 class="card-title mb-1">${article.title}</h3>
-          <p class="card-text mb-1">${article.content}</p>
-          <p class="card-text mb-1">associated Sentiment ${article.sentiment}</p>
-      </div>
+  <div class="card w-75">
+    <div class="card-body">
+      <h3 class="card-title">${article.title}</h3>
+      <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
+      <p class="card-text">${article.description}</p>
+      <p class="card-text mb-1">sentiment <span class="${sentimentOutcome} fw-bold"> ${article.sentiment} </span> </p>
+    </div>
   </div>
   `;
   parentContainer.innerHTML = articelComponent;
 }
 
 
-function renderArticelClean(article) {
-  const parentContainer = document.querySelector(".container");
+function renderArticel(article) {
+  const parentContainer = document.getElementById("sentiment-analysis");
   const articelComponent = `
-  <div class="card bg-light">
-      <div class="card-body text-center">
+  <div class="card w-75">
+      <div class="card-body">
+          <h3 class="card-title">${article.title}</h3>
           <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
-          <h3 class="card-title mb-1">${article.title}</h3>
-          <p class="card-text mb-1">${article.content}</p>
+          <p class="card-text">${article.description}</p>
       </div>
   </div>
   `;
@@ -137,22 +145,18 @@ function timeDelayedLoop(articles) {
   const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
   async function load() {
-    // Add limit
-
-    /* articels with added sentiment */
    
     for (let article of articles) {
      
-      renderArticelClean(article)
+      renderArticel(article)
       
       await timer(1500); 
       const sentimentArticel = analyseSentiment(article);
-      renderArticelSentiment(sentimentArticel)
-   
+      renderArticelWithSentiment(sentimentArticel)
       await timer(3000);
 
       if(sentimentArticel.sentiment !== "negative"){
-        addArticels(sentimentArticel)
+        addFilteredArticels(sentimentArticel)
       }
       
     }
