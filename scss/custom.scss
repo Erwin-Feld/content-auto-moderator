@@ -1,11 +1,18 @@
 $primary-green: #8CD897;
 // $orange: #f26c22;
 $secondary-light: #4C6E54;
-
+$primary-light: #d0d9e0;
+$gray-custom: #5E6A75;
 
 // Add custom variables ???
 $primary: $primary-green;
 $secondary: $secondary-light;
+$light: $primary-light;
+$info: $gray-custom;
+
+/*  set default heihgt of all cards  */
+$card-height: 100%;
+
 
 // $secondary: $orange;
 // $body-bg: rgb(85, 85, 85);
