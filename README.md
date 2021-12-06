@@ -1,6 +1,16 @@
-# Content Auto Moderator
+# AI Auto Moderator
+performs sentiment analysis over fetched content
+<br />
+classify it to positiv, neutral or negativ. negative content is filtered out.
 
-query RSS Feed and categorize the post content to negative, neutral or positiv
 
-visual Darstellung of a sentiment categorize of news articles
+#### Run dev script
+```
+npm run dev
+```
+#### Run build
+```
+npm run build
+```
+
 
