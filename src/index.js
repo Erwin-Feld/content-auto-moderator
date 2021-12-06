@@ -80,11 +80,13 @@ function addFilteredArticels(article){
   const articelComponent = `
   <div class="col-md-6 col-lg-3">
     <div class="card ">
-      <div class="card-body flex-fill">
+      <div class="card-body ">
       <h3 class="card-title">${article.title}</h3>
       <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
-      <p class="card-text">${article.content}</p>
-      <a target="_blank" rel="noopener noreferrer" href="${article.url}" class="btn btn-secondary">go to article</a>
+      <p class="card-text">${article.content}
+      <a class="text-info" target="_blank" rel="noopener noreferrer" href="${article.url}" >read on...</a>
+      </p>
+      
     </div>
   </div>
 </div>
