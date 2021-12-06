@@ -105,7 +105,7 @@ function renderArticelWithSentiment(article) {
   if(article.sentiment === "negative") {
     sentimentOutcome = "text-danger" /* red color of text */
   } else if (article.sentiment === "neutral"){
-    sentimentOutcome = "text-secondary" /* gray color of text */
+    sentimentOutcome = "text-info" /* gray color of text */
   } else {
     sentimentOutcome = "text-success" /* red color of text */
   }
