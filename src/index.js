@@ -81,7 +81,7 @@ function addFilteredArticels(article){
   <div class="col-md-6 col-lg-3">
     <div class="card ">
       <div class="card-body ">
-      <h3 class="card-title">${article.title}</h3>
+      <h5 class="card-title">${article.title}</h5>
       <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
       <p class="card-text">${article.content}
       <a class="text-info" target="_blank" rel="noopener noreferrer" href="${article.url}" >read on...</a>
@@ -116,7 +116,7 @@ function renderArticelWithSentiment(article) {
   const articelComponent = `
   <div class="card w-75">
     <div class="card-body">
-      <h3 class="card-title">${article.title}</h3>
+      <h5 class="card-title">${article.title}</h5>
       <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
       <p class="card-text">${article.description}</p>
       <p class="card-text mb-1">sentiment <span class="${sentimentOutcome} fw-bold"> ${article.sentiment} </span> </p>
@@ -132,7 +132,7 @@ function renderArticel(article) {
   const articelComponent = `
   <div class="card w-75">
       <div class="card-body">
-          <h3 class="card-title">${article.title}</h3>
+          <h5 class="card-title">${article.title}</h5>
           <img src="${article.urlToImage}" alt="" class="card-img-top mb-1" />
           <p class="card-text">${article.description}</p>
       </div>
